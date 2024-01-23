@@ -1,0 +1,35 @@
+[ INFO ] [Test worker] [2024-01-23 21:56:29] org.springframework.test.context.support.AnnotationConfigContextLoaderUtils [83] - Could not detect default configuration classes for test class [com.picpal.framework.BoilerplateApplicationTests]: BoilerplateApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+[ INFO ] [Test worker] [2024-01-23 21:56:29] org.springframework.boot.test.context.SpringBootTestContextBootstrapper [234] - Found @SpringBootConfiguration com.picpal.framework.BoilerplateApplication for test class com.picpal.framework.BoilerplateApplicationTests
+[ INFO ] [Test worker] [2024-01-23 21:56:30] com.picpal.framework.BoilerplateApplicationTests [50] - Starting BoilerplateApplicationTests using Java 17.0.9 with PID 99524 (started by picpal in /Users/picpal/Desktop/board-fullstack/boilerplate)
+[ INFO ] [Test worker] [2024-01-23 21:56:30] com.picpal.framework.BoilerplateApplicationTests [660] - The following 1 profile is active: "local"
+[ INFO ] [Test worker] [2024-01-23 21:56:36] org.quartz.impl.StdSchedulerFactory [1220] - Using default implementation for ThreadExecutor
+[ INFO ] [Test worker] [2024-01-23 21:56:36] org.quartz.core.SchedulerSignalerImpl [61] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+[ INFO ] [Test worker] [2024-01-23 21:56:36] org.quartz.core.QuartzScheduler [229] - Quartz Scheduler v.2.3.2 created.
+[ INFO ] [Test worker] [2024-01-23 21:56:36] org.quartz.simpl.RAMJobStore [155] - RAMJobStore initialized.
+[ INFO ] [Test worker] [2024-01-23 21:56:36] org.quartz.core.QuartzScheduler [294] - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+[ INFO ] [Test worker] [2024-01-23 21:56:36] org.quartz.impl.StdSchedulerFactory [1374] - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+[ INFO ] [Test worker] [2024-01-23 21:56:36] org.quartz.impl.StdSchedulerFactory [1378] - Quartz scheduler version: 2.3.2
+[ INFO ] [Test worker] [2024-01-23 21:56:36] org.quartz.core.QuartzScheduler [2293] - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@5b715ea
+[ WARN ] [Test worker] [2024-01-23 21:56:36] org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration [86] - 
+
+Using generated security password: 10c32420-e848-4b8c-8263-e7116980f795
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+[ INFO ] [Test worker] [2024-01-23 21:56:37] org.springframework.boot.actuate.endpoint.web.EndpointLinksResolver [58] - Exposing 2 endpoint(s) beneath base path '/actuator'
+[ INFO ] [Test worker] [2024-01-23 21:56:37] org.springframework.security.web.DefaultSecurityFilterChain [54] - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@34e4fb39, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@36fe83d, org.springframework.security.web.context.SecurityContextHolderFilter@903c13, org.springframework.security.web.header.HeaderWriterFilter@5acd7d1c, org.springframework.web.filter.CorsFilter@310f8a05, org.springframework.security.web.csrf.CsrfFilter@5111f814, org.springframework.security.web.authentication.logout.LogoutFilter@470b5213, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@34e68840, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@6dc2e473, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@4f98ac31, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@430212cb, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5f4e389a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@77881b7a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5cb6abc8, org.springframework.security.web.access.ExceptionTranslationFilter@4bceac99, org.springframework.security.web.access.intercept.AuthorizationFilter@6e617c0e]
+[ INFO ] [Test worker] [2024-01-23 21:56:37] org.springframework.scheduling.quartz.SchedulerFactoryBean [729] - Starting Quartz Scheduler now
+[ INFO ] [Test worker] [2024-01-23 21:56:37] org.quartz.core.QuartzScheduler [547] - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+[ INFO ] [Test worker] [2024-01-23 21:56:37] com.picpal.framework.BoilerplateApplicationTests [56] - Started BoilerplateApplicationTests in 7.524 seconds (process running for 9.386)
+[ INFO ] [SpringApplicationShutdownHook] [2024-01-23 21:56:38] org.quartz.core.QuartzScheduler [585] - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+[ INFO ] [SpringApplicationShutdownHook] [2024-01-23 21:56:38] org.springframework.scheduling.quartz.SchedulerFactoryBean [847] - Shutting down Quartz Scheduler
+[ INFO ] [SpringApplicationShutdownHook] [2024-01-23 21:56:38] org.quartz.core.QuartzScheduler [666] - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+[ INFO ] [SpringApplicationShutdownHook] [2024-01-23 21:56:38] org.quartz.core.QuartzScheduler [585] - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+[ INFO ] [SpringApplicationShutdownHook] [2024-01-23 21:56:38] org.quartz.core.QuartzScheduler [740] - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.

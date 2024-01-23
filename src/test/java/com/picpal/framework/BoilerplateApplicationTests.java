@@ -1,4 +1,4 @@
-package com.picpal.boilerplate;
+package com.picpal.framework;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

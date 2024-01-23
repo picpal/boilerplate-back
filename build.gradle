@@ -1,6 +1,7 @@
 buildscript{
 	ext {
 		restdocsApiSpecVersion = '0.17.1'
+		snippetsDir = file('build/generated-snippets')
 	}
 }
 
@@ -35,11 +36,12 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-aop'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-test'
 	implementation 'org.springframework.session:spring-session-core'
+	implementation 'org.springframework.data:spring-data-commons'
 
 	compileOnly 'javax.servlet:javax.servlet-api:3.1.0'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
@@ -75,12 +77,12 @@ dependencies {
 
 }
 
-/*UTF-8 Encoding*/
+// UTF-8 인코딩을 위한 compileJava 옵션 설정
 compileJava.options.encoding = 'UTF-8'
-task.withType(JavaCompile).tap{
-	configureEach{
-		options.encoding = 'UTF-8'
-	}
+
+// JavaCompile 타입의 모든 태스크에 대해 UTF-8 인코딩 적용
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
 }
 
 /*properties duplicate prevent*/
