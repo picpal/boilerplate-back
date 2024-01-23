@@ -1,7 +1,18 @@
+buildscript{
+	ext {
+		restdocsApiSpecVersion = '0.17.1'
+	}
+}
+
 plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.2.2'
 	id 'io.spring.dependency-management' version '1.1.4'
+
+	//restdocs + swagger
+	id 'org.asciidoctor.jvm.convert' version '3.3.1'
+	id 'com.epages.restdocs-api-spec' version "${restdocsApiSpecVersion}"
+	id 'org.hidetake.swagger.generator' version '2.18.2'
 }
 
 group = 'com.picpal'
@@ -12,6 +23,8 @@ java {
 }
 
 configurations {
+	asciidoctorExt
+
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
@@ -24,16 +37,104 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-aop'
+	implementation 'org.springframework.boot:spring-boot-test'
 	implementation 'org.springframework.session:spring-session-core'
-	compileOnly 'org.projectlombok:lombok'
+
+	compileOnly 'javax.servlet:javax.servlet-api:3.1.0'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.h2database:h2'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+
+	// actuator
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+	// lombok
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testCompileOnly 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
+
+	// json
+	implementation 'com.googlecode.json-simple:json-simple:1.1'
+
+	// rest docs
+	asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
+	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+
+	// swagger UI
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
+	testImplementation 'com.epages:restdocs-api-spec-mockmvc:' + restdocsApiSpecVersion
+	testImplementation 'com.squareup.okhttp3:mockwebserver'
+
+	// Quartz
+	implementation 'org.quartz-scheduler:quartz:2.3.2'
+	implementation 'org.springframework.boot:spring-boot-starter-quartz'
+
 }
 
-tasks.named('test') {
+/*UTF-8 Encoding*/
+compileJava.options.encoding = 'UTF-8'
+task.withType(JavaCompile).tap{
+	configureEach{
+		options.encoding = 'UTF-8'
+	}
+}
+
+/*properties duplicate prevent*/
+tasks {
+	processResources{
+		duplicatesStrategy = org.gradle.api.file.DuplicatesStrategy.INCLUDE
+	}
+}
+
+tasks.withType(GenerateSwaggerUI){
+	dependsOn 'openapi3'
+
+	delete file('src/main/resources/static/docs')
+	copy{
+		from 'build/resources/main/static/docs'
+		into 'src/main/resources/static/docs/'
+	}
+}
+
+
+task copyDocument(type: Copy){
+	dependsOn asciidoctor
+	from file('build/docs/asciidoc')
+	into file('src/main/resources/static/docs')
+}
+
+test {
 	useJUnitPlatform()
 }
+
+bootJar{
+	dependsOn('openapi3')
+}
+
+openapi3{
+	server = "http://localhost:8080"
+	title = "Boilerplate DOCS"
+	description = "Boilerplate REST API TEST DOCS"
+	version = "0.0.1"
+	outputFileNamePrefix = 'open-api-3.0.1'
+	format = 'json'
+	outputDirectory = 'build/resources/main/static/docs'
+}
+
+asciidoctor {
+	configurations 'asciidoctorExt'
+	baseDirFollowsSourceFile()
+	inputs.dir snippetsDir
+	dependsOn test
+}
+
+asciidoctor.doFirst{
+	delete file('src/main/resources/static/docs')
+}
+
+
+
