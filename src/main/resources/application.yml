@@ -3,6 +3,30 @@ spring:
     active: local
 
 ########################################################
+# ************ HTTP/HTTPS ***********
+########################################################
+server:
+  port: 8080
+  undertow:
+    io-threads: 4
+    worker-threads: 32
+    buffer-size: 1024
+    direct-buffers: true
+  error:
+    whitelabel:
+      enabled: false
+    servlet:
+      encoding:
+        force-response: true
+
+# Configure the server to run with SSL/TLS and using HTTPS
+#  port: 8443
+#  ssl:
+#    key-store: classpath:your_own_cert.jks.sample
+#    key-store-password: <your-ssl-keystore-password>
+#    key-password: <your-ssl-key-password>
+
+########################################################
 # ************ Actuator Security Settings ***********
 ########################################################
 management:
