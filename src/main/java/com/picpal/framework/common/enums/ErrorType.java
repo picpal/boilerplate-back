@@ -40,7 +40,7 @@ public enum ErrorType implements IntentStateWithDescription {
      */
     private final String description;
 
-    /**
+    /**=
      * Constructor
      *
      * @param description description
