@@ -82,6 +82,9 @@ dependencies {
 	implementation 'org.quartz-scheduler:quartz:2.3.2'
 	implementation 'org.springframework.boot:spring-boot-starter-quartz'
 
+	//jasypt
+	implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4'
+
 }
 
 // UTF-8 인코딩을 위한 compileJava 옵션 설정
