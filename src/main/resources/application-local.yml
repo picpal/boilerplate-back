@@ -20,9 +20,9 @@ spring:
     # H2 DB 연결 주소 (Embedded Mode)
     url: 'jdbc:h2:~/test'
     # H2 DB 접속 ID (사용자 지정)
-    username: ENC(lqiu4oC3sI9KyVcQfwf5yn7vovMGliTUjFEAqiY6I7A4UdJM2e5dtU4EKwqkVwSD)
+    username: ENC(Vs3tmC8+h1b/7NrtgiCrbBDT4GReBfc/zupstVQ6eHE1Pz1CXLgn7gHpaHZuoEPS)
     # H2 DB 접속 PW (사용자 지정)
-    password: ENC(QpAyhr8wUfxRjar0pHz63G14OjgSgOkqxlf5erBIoFKi7SuIOQ537sBTFfNIDYDR)
+    password: ENC(N41X2A786i1pX3/G9ANN1t3uGHKiWHUgQ+P4L9uTNhs1UN5p0kntXj3LIhkWahei)
 
   # H2 Database console
   h2:

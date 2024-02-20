@@ -1,14 +1,12 @@
-package com.picpal.framework.sample.dao.entity;
+package com.picpal.framework.sample.repository.model;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
-@Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Data
+//@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table
 public class SampleEntity {
@@ -27,12 +25,7 @@ public class SampleEntity {
     private Long id;
 
     @Column(nullable = false, length = 30)
-    private String name;
+    private String username;
 
-    @Column(nullable = false)
-    private int age;
-
-    @Column(nullable = false)
-    private LocalDate birthday;
 
 }

@@ -14,12 +14,12 @@ class JasyptConfigTest {
         String username = "admin";
         String password = "admin123";
 
-        log.info("####### jasypt ENC : {} ",jasyptEncoding(username));
-        log.info("####### jasypt ENC : {} ",jasyptEncoding(password));
+        log.info("####### jasypt ENC username : {} ",jasyptEncoding(username));
+        log.info("####### jasypt ENC password : {} ",jasyptEncoding(password));
     }
 
     public String jasyptEncoding(String value) {
-        String key = "aaaabbbb"; // 암호화 키
+        String key = "00001111"; // 암호화 키
         StandardPBEStringEncryptor pbeEnc = new StandardPBEStringEncryptor();
         pbeEnc.setAlgorithm("PBEWITHHMACSHA512ANDAES_256");
         pbeEnc.setPassword(key);
