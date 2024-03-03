@@ -53,9 +53,14 @@ dependencies {
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+	testImplementation('org.junit.jupiter:junit-jupiter:5.7.0')
 
-	// validator
+	// Mybatis
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.4'
 
+	// Apache POI for Excel handling
+	implementation 'org.apache.poi:poi:5.2.2'
+	implementation 'org.apache.poi:poi-ooxml:5.2.2'
 
 	// actuator
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
@@ -132,7 +137,7 @@ openapi3{
 	title = "Boilerplate DOCS"
 	description = "Boilerplate REST API TEST DOCS"
 	version = "0.0.1"
-	outputFileNamePrefix = 'open-api-3.0.1'
+	outputFileNamePrefix = 'boilerplate-1.0.0'
 	format = 'json'
 	outputDirectory = 'build/resources/main/static/docs'
 }

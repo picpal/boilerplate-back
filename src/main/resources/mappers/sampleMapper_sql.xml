@@ -1,0 +1,23 @@
+<mapper namespace="com.picpal.framework.sample.mapper.SampleMapper">
+    <!-- ####### user insert   -->
+    <insert id="insertUserRecord">
+        insert into SAMPLE_ENTITY(
+            id,
+            age,
+            birthday ,
+            name,
+            username
+        ) values (
+            #{id},
+            #{age},
+            #{birthday},
+            #{name},
+            #{username}
+        )
+    </insert>
+
+    <!-- ####### coupon insert   -->
+    <insert id="insertCouponRecord">
+
+    </insert>
+</mapper>
