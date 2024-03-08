@@ -1,15 +1,20 @@
 package com.picpal.framework.common.excel;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 public class ExcelReader {
-    public List<Map<String, Object>> readExcelFile(InputStream inputStream) {
+    public static List<Map<String, Object>> readExcelFile(InputStream inputStream) {
         List<Map<String, Object>> records = new ArrayList<>();
         try (Workbook workbook = new XSSFWorkbook(inputStream)) {
             Sheet sheet = workbook.getSheetAt(0); // 첫 번째 시트 선택
@@ -38,7 +43,7 @@ public class ExcelReader {
         return records;
     }
 
-    private Object getCellValue(Cell cell) {
+    public static Object getCellValue(Cell cell) {
         // 셀 타입에 따른 값 처리
         switch (cell.getCellType()) {
             case STRING: return cell.getStringCellValue();
@@ -48,4 +53,22 @@ public class ExcelReader {
             default: return null;
         }
     }
+//
+//    public static void main(String[] args) {
+//
+//        try {
+//            FileInputStream fis = new FileInputStream("C:/Users/bwc/Desktop/picpal/boilerplate-back/src/main/resources/static/excel/이마트24_EMS300_1구간.xlsx");
+//            List<Map<String, Object>> list =  readExcelFile(fis);
+//
+//            for (Map<String, Object> stringObjectMap : list) {
+//                log.info((String) stringObjectMap.get("유효기간구간순번"));
+//            }
+//
+//        } catch (FileNotFoundException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//    }
+
+
 }

@@ -1,13 +1,19 @@
 package com.picpal.framework.common.excel;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 public class ExcelDataService {
     private final SqlSessionFactory sqlSessionFactory;
 
@@ -34,4 +40,36 @@ public class ExcelDataService {
             e.printStackTrace();
         }
     }
+
+
+    public void uploadExcel() {
+
+        try {
+            FileInputStream fis = new FileInputStream("C:/Users/bwc/Desktop/picpal/boilerplate-back/src/main/resources/static/excel/이마트24_EMS300_1구간.xlsx");
+            List<Map<String, Object>> dataList =  ExcelReader.readExcelFile(fis);
+
+            List<Map<String,Object>> list = new LinkedList<>();
+
+            for (Map<String, Object> stringObjectMap : dataList) {
+                Map<String,Object> data = new HashMap<>();
+                data.put("col1" , stringObjectMap.get("유효기간구간순번"));
+                data.put("col2" , stringObjectMap.get("일련번호"));
+                data.put("col3" , stringObjectMap.get("쿠폰핀번호"));
+                data.put("col4" , stringObjectMap.get("업체코드"));
+                data.put("col5" , stringObjectMap.get("상품코드"));
+                data.put("col6" , stringObjectMap.get("유효종료일자"));
+                data.put("col7" , stringObjectMap.get("유효시작일자"));
+
+                list.add(data);
+            }
+
+            processExcelData("com.picpal.framework.sample.mapper.SampleMapper","insertExcelCells",list);
+
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
 }

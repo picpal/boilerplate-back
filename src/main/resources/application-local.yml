@@ -11,7 +11,7 @@ sys:
 spring:
   # PID3
   pid:
-    file: /apprun/boilderplate/boilderplate.pid
+    file: ./logs/boilderplate.pid
 
   # H2 Database connection
   datasource:
