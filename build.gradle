@@ -90,6 +90,9 @@ dependencies {
 	//jasypt
 	implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4'
 
+	// 외부 jar 등록 테스트
+	implementation files('libs/util-common.jar')
+
 }
 
 // UTF-8 인코딩을 위한 compileJava 옵션 설정
@@ -153,5 +156,35 @@ asciidoctor.doFirst{
 	delete file('src/main/resources/static/docs')
 }
 
+
+
+
+
+// 패키지 jar로 build
+
+sourceSets {
+	// 'util'이라는 이름의 새로운 소스 세트 생성
+	util {
+		java {
+			srcDir 'src/main/java'
+			include 'com/picpal/framework/common/utils/html/**'
+		}
+	}
+}
+
+
+task utilJar(type: Jar) {
+	// 생성될 JAR 파일의 이름 지정
+	archiveFileName = 'util-common.jar'
+	// 'util' 소스 세트의 컴파일된 클래스를 포함
+	from sourceSets.util.output
+	// JAR 메타데이터 구성 (필요한 경우)
+	// manifest {
+	//     attributes(
+	//         'Implementation-Title': 'Utility Common Library',
+	//         'Implementation-Version': version
+	//     )
+	// }
+}
 
 
