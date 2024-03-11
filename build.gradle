@@ -90,8 +90,12 @@ dependencies {
 	//jasypt
 	implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4'
 
+	// jsoup
+	implementation group: 'org.jsoup', name: 'jsoup', version: '1.7.2'
+
 	// 외부 jar 등록 테스트
 	implementation files('libs/util-common.jar')
+
 
 }
 

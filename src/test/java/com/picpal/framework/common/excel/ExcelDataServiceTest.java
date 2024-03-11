@@ -1,9 +1,8 @@
 package com.picpal.framework.common.excel;
 
-import com.picpal.framework.common.excel.ExcelDataService;
-import com.picpal.framework.sample.mapper.SampleMapper;
+import com.picpal.framework.common.utils.excel.ExcelDataService;
+import com.picpal.framework.common.utils.excel.ExcelReader;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
