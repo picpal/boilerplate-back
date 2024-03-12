@@ -1,5 +1,6 @@
-package com.picpal.framework.common.utils.HtmlGenerator;
+package com.picpal.framework.common.utils.ReportGenerator;
 
+import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -8,11 +9,11 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 public class HtmlGenerator {
 
     public Document doc;
@@ -25,10 +26,10 @@ public class HtmlGenerator {
      * list 데이터를 테이블 형태의 html 태그로 변환
      *
      * @param jsonStr 테이블 row 데이터
-     * @param classAttribute 테이블의 className
+     * @param params 점검 결과
      *
      * */
-    public Element createTable(String jsonStr, String classAttribute){
+    public Element createTable(String jsonStr,boolean useTitle, List<String> params){
         JSONParser parser = new JSONParser();
         JSONArray rows;
         try {
@@ -37,19 +38,40 @@ public class HtmlGenerator {
             throw new RuntimeException(e);
         }
 
-        Element table = doc.createElement("table").addClass(classAttribute);
+        Element table = doc.createElement("table");
+        int rowIdx = 0;
+        int valIdx = 0;
         for (Object rowObj : rows) {
             JSONArray rowArray = (JSONArray) rowObj;
             Element tr = table.appendElement("tr");
 
+            int cellIdx = 0;
             for (Object cellObj : rowArray) {
                 JSONObject cellJson = (JSONObject) cellObj;
                 Map<String, String> cell = new HashMap<>();
+
                 for (Object keyObj : cellJson.keySet()) {
                     String key = (String) keyObj;
                     String value = (String) cellJson.get(key);
+
+                    // Table header 생성 시
+                    if(useTitle && rowIdx == 0 ){
+                        cell.put(key, value);
+                        continue;
+                    }
+
+                    // 전달받은 parameter값 맵핑
+                    if(rowArray.size() == cellIdx + 1){
+                        value = params.size() > valIdx
+                                ? params.get(valIdx)
+                                : value;
+                        valIdx++;
+                    }
+                    
+                    // parameter값 할당
                     cell.put(key, value);
                 }
+                cellIdx++;
 
                 if(cell.get("text") == null || "".equals(cell.get("text"))){
                     continue;
@@ -61,6 +83,7 @@ public class HtmlGenerator {
                         .attr("colspan",cell.get("colspan") == null ? "1" : cell.get("colspan"))
                         .attr("style","border:1px solid;");
             }
+            rowIdx++;
         }
 
         return table;
@@ -74,12 +97,33 @@ public class HtmlGenerator {
         return ul;
     }
 
-    public Element createDl(String[][] definitions, String classAttribute) {
-        Element dl = doc.createElement("dl").addClass(classAttribute);
-        for (String[] definition : definitions) {
-            dl.appendElement("dt").text(definition[0]);
-            dl.appendElement("dd").text(definition[1]);
+    public Element createDl(String definitions) {
+        JSONParser parser = new JSONParser();
+        JSONArray section;
+        try {
+            section = (JSONArray) parser.parse(definitions);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
         }
+
+        Element dl = doc.createElement("dl");
+        for (Object sec : section) {
+            JSONObject data = (JSONObject) sec;
+            for (Object row : data.keySet()) {
+                String key = (String) row;
+                if("title".equals(key)){
+                    dl.appendElement("dt").text((String) data.get(key)).attr("style","margin:5px 0;");
+                }
+
+                if("list".equals(key)){
+                    JSONArray list = (JSONArray) data.get(key);
+                    for (Object item : list) {
+                        dl.appendElement("dd").text((String) item);
+                    }
+                }
+            }
+        }
+
         return dl;
     }
 
